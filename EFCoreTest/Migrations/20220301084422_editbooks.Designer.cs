@@ -4,6 +4,7 @@ using EFCoreTest;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreTest.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220301084422_editbooks")]
+    partial class editbooks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,9 +38,7 @@ namespace EFCoreTest.Migrations
 
                     b.Property<string>("Age2")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("varchar(100)")
-                        .HasDefaultValue("10");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("AuthorName")
                         .HasColumnType("nvarchar(max)");
@@ -52,24 +52,7 @@ namespace EFCoreTest.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
-
                     b.ToTable("T_Books", (string)null);
-                });
-
-            modelBuilder.Entity("EFCoreTest.Dog", b =>
-                {
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Name");
-
-                    b.ToTable("Dog");
                 });
 
             modelBuilder.Entity("EFCoreTest.Person", b =>

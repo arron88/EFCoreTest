@@ -14,6 +14,9 @@ namespace EFCoreTest
         {
             builder.ToTable("T_Books");
             builder.Property(b=>b.Name).HasMaxLength(50);
+            builder.Property(b => b.Age).HasColumnName("age111");
+            builder.Property(b => b.Age2).HasColumnType("varchar(100)");
+            builder.Property(b => b.Age2).HasDefaultValue("10");
         }
     }
 }

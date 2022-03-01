@@ -11,6 +11,7 @@ namespace EFCoreTest
     {
         public DbSet<Books> Books { get; set; }
         public DbSet<Person> Person { get; set; }
+        public DbSet<Dog> Dog { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -21,6 +22,8 @@ namespace EFCoreTest
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+            modelBuilder.Entity<Books>().Ignore(b => b.Age1);
+            modelBuilder.Entity<Books>().HasIndex(b=>b.Name).IsUnique();
         }
     }
 }
